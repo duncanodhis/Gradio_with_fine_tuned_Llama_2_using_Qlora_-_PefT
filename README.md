@@ -16,15 +16,17 @@ Setup
 To set up this project, ensure you have the necessary libraries installed. You can use a virtual environment to keep the dependencies organized:
 
 # Create a virtual environment
-python -m venv llm_venv
+$ python -m venv llm_venv
 
 # Activate the virtual environment
 source llm_venv/bin/activate  # Linux/macOS
-# or
+
+ or
+ 
 .\llm_venv\Scripts\activate  # Windows
 
 # Install the required libraries
-pip install torch transformers datasets bitsandbytes peft gradio pyngrok
+$ pip install -q accelerate==0.21.0 peft==0.4.0 bitsandbytes==0.40.2 transformers==4.31.0 trl==0.4.7 gradio pyngrok
 
 # Fine-Tuning the LLaMA 2 Model
 The provided code snippet fine-tunes the LLaMA 2 model using QLoRA. The dataset used for fine-tuning is mlabonne/guanaco-llama2-1k, which contains 1000 instruction-following samples.
@@ -55,10 +57,10 @@ To make the Gradio interface accessible on a public URL, Ngrok is used to create
 For a more portable and reproducible setup, consider using Docker. A Dockerfile can be used to create an environment to run the Gradio server. Here's a brief summary of how to build and run the Docker container:
 
 # Build the Docker Image:
-docker build -t gradio-llama2 .
+$ docker build -t gradio-llama2 .
 
 # Run the Docker Container:
-docker run --gpus all -p 7865:7865 gradio-llama2
+$ docker run --gpus all -p 7865:7865 gradio-llama2
 
 # Access the Gradio Interface:
 Once the container is running, you can access the Gradio interface at http://localhost:7865. If using Ngrok, update the Gradio server port and connect with Ngrok to get a public URL.
